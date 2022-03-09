@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Onfido Web SDK example</title>
+
+    <link rel="stylesheet" href="static/style.css" />
+</head>
+<body>
+<script src="static/onfido.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">//<![CDATA[
+function onfidoInit(){
+    Onfido.init({
+      useModal: false,
+      token: "{{ token }}",
+      onComplete: function (data) {
+        // callback for when everything is complete
+        console.log('auth completed');
+        document.write(data)
+      },
+      onUserExit: function (userExitCode) {
+        console.log(userExitCode)
+      },
+      steps: ["userConsent","auth"],
+    });
+}
+$(document).ready(function() {
+    onfidoInit();
+});
+//]]></script>
+<div id="onfido-mount"></div>
+
+</body>
+</html>
