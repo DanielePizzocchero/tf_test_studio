@@ -31,6 +31,7 @@ def authenticate():
 
     if request.method == 'POST':
         session['token'] = request.form.get("token")
+        session['workflow_id'] = request.form.get("workflow_id")
         session['autofill'] = request.form.get("autofill")
         print ('autofill', session['autofill'])
         session['kfaces'] = request.form.get("kfaces")
@@ -47,14 +48,14 @@ def authenticate():
 
         request_body = {"applicant_id": session["applicant_id"], "referrer": "*"}
         token = api.sdk_token.generate(request_body)["token"]
-        workflow_run_id = initiate_workflow(session["applicant_id"])
+        workflow_run_id = initiate_workflow(session["applicant_id"], session["workflow_id"])
         return render_template("view.html", token=token, applicant_id=session["applicant_id"], workflow_run_id=workflow_run_id)
     else:
         return render_template("error.html", error=ret)
     #initiate workflow
 
 
-def initiate_workflow(applicant_id):
+def initiate_workflow(applicant_id, workflow_id):
     # POST /v4/workflow_runs
     #{
     #“workflow_id”: “ < WORKFLOW_ID >”,
@@ -63,7 +64,7 @@ def initiate_workflow(applicant_id):
 
     url = "https://api.eu.onfido.com/v4/workflow_runs"
     payload = json.dumps({
-        "workflow_id": "ed9a3cef-507e-4d4a-a2d8-7bd5dd835bc0",
+        "workflow_id": workflow_id,
         "applicant_id": applicant_id
     })
     headers = {
@@ -72,6 +73,7 @@ def initiate_workflow(applicant_id):
     }
     response = requests.request("POST", url, headers=headers, data=payload)
     response = json.loads(response.text)
+    print("response---->", response)
     print(response["id"])
     return response["id"]
 
@@ -110,7 +112,8 @@ def create_applicant(api):
 @app.route("/check", methods=['POST'])
 def run_check_request():
 
-    reports = ["document", "facial_similarity_photo"]
+    #reports = ["document", "facial_similarity_photo"]
+    reports = ["document"]
 
     if session["kfaces"] is not None:
         reports.append("known_faces")
