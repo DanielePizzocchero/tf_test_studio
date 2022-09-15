@@ -65,6 +65,41 @@
 function onfidoInit(){
     Onfido.init({
       useModal: false,
+      language: {
+        "locale": "en_US",
+        "phrases": {
+            "doc_confirmation": {
+                "body_permit": "Make sure your details of passport card are clear and unobstructed"
+            },
+            "doc_select": {
+                "button_permit": "Passport Card"
+            },
+            "doc_submit": {
+                "title_permit_back": "Submit passport card (back)",
+                "title_permit_front": "Submit passport card (front)"
+            },
+            "photo_upload": {
+                "body_permit_back": "Upload back of passport card from your computer",
+                "body_permit_front": "Upload front of passport card from your computer"
+            }
+        },
+        "mobilePhrases": {
+            "doc_confirmation": {
+                "body_permit": "Make sure your details of passport card are clear and unobstructed"
+            },
+            "doc_select": {
+                "button_permit": "Passport Card"
+            },
+            "doc_submit": {
+                "title_permit_back": "Submit passport card (back)",
+                "title_permit_front": "Submit passport card (front)"
+            },
+            "photo_upload": {
+                "body_permit_back": "Take a photo of the back of your passport card",
+                "body_permit_front": "Take a photo of the front of your passport card"
+            }
+        }
+      },
       token: "{{ token }}",
       containerId: 'onfido-mount',
       workflowRunId: "{{ workflow_run_id }}",
