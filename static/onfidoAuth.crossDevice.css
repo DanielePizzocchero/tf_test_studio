@@ -1,4 +1,4 @@
-/*! OnfidoAuth SDK 9.0.0-rc.1 */
+/*! OnfidoAuth SDK 9.0.0 */
 /* CSS variables. */
 :root {
 	--PhoneInput-color--focus: #03b2cb;
@@ -131,5 +131,6 @@
 	opacity: 1;
 	color: var(--PhoneInputCountrySelectArrow-color--focus);
 }
+.onfido-sdk-ui-PhoneNumberInput-flagIcon{background-size:100%;background-repeat:no-repeat;background-position:center}
 
 /*# sourceMappingURL=onfidoAuth.crossDevice.css.map*/
