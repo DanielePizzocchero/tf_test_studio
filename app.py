@@ -37,8 +37,8 @@ def authenticate():
         session['kfaces'] = request.form.get("kfaces")
         print('kfaces', session['kfaces'])
     else:
-        if session.get('token') is None:
-            return render_template("error.html", error="token not set")
+        if session.get('token') is None or session.get("workflow_id") is None:
+            return render_template("error.html", error="token/workflow id not set")
 
     api = onfido.Api(session['token'], region=Region.EU)
     ret = create_applicant(api)
