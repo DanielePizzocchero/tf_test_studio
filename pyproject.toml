@@ -5,7 +5,7 @@ description = "python web sdk test orch"
 authors = ["daniele.pizzocchero <daniele.pizzocchero@onfido.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 Flask = "^2.0.2"
 onfido-python = "^2.1.0"
 flake8 = "^4.0.1"
