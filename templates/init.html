@@ -53,7 +53,11 @@
       #applicant-form button {
         width: 50%;
         margin: 0.5em auto;
-      }</style>
+      }
+      #extra {
+        display:none
+      }
+    </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="static/onfido.min.js"></script>
@@ -69,11 +73,12 @@
   <input type="text"  id="workflow_id" name="workflow_id" size="30" ><br><br>
 
 
-
+<div id="extra">
     <label for="autof">Autofill</label>
   <input type="checkbox"  id="autofill" name="autofill" ><br><br>
     <label for="autof">Known Faces</label>
   <input type="checkbox"  id="kfaces" name="kfaces" ><br><br>
+</div>
   <input type="submit" value="Submit" class="ods-button -action--primary onfido-sdk-ui-Theme-button-centered onfido-sdk-ui-Theme-button-lg">
 
 </form>
