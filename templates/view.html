@@ -107,28 +107,28 @@ function onfidoInit(){
       onComplete: function (data) {
         // callback for when everything is complete
         console.log(data.document_front.id)
-        $.ajax({
-                type : "POST",
-                url : '/check',
-                dataType : 'json',
-                contentType: "application/json; charset=utf-8",
-                data : JSON.stringify({ doc_id : data.document_front.id}),
-
-                success: function (response) {
-                    console.log("response " + JSON.stringify(response))
-                    if (! response.no_autofill){
-                        document.write("<link rel='stylesheet' href='static/style.css' />")
-                        document.write("<div id='onfido-mount'><div class='onfido-sdk-ui-Modal-inner' style='text-align: left; max-width: 50em;'><div id='autofill' class='onfido-sdk-ui-Theme-step onfido-sdk-ui-Theme-defaultLogo' style='text-align: left;'></div></div></div>")
-                        response = JSON.stringify(response, null, "  ")
-                        document.getElementById("autofill").innerHTML = "<pre>" + response + "</pre>"
-                     }
-                },
-                error: function(xhr){
-                    console.log("An error occured: " + xhr.status + " " + xhr.statusText);
-
-                }
-
-	      });
+        // $.ajax({
+        //         type : "POST",
+        //         url : '/check',
+        //         dataType : 'json',
+        //         contentType: "application/json; charset=utf-8",
+        //         data : JSON.stringify({ doc_id : data.document_front.id}),
+        //
+        //         success: function (response) {
+        //             console.log("response " + JSON.stringify(response))
+        //             if (! response.no_autofill){
+        //                 document.write("<link rel='stylesheet' href='static/style.css' />")
+        //                 document.write("<div id='onfido-mount'><div class='onfido-sdk-ui-Modal-inner' style='text-align: left; max-width: 50em;'><div id='autofill' class='onfido-sdk-ui-Theme-step onfido-sdk-ui-Theme-defaultLogo' style='text-align: left;'></div></div></div>")
+        //                 response = JSON.stringify(response, null, "  ")
+        //                 document.getElementById("autofill").innerHTML = "<pre>" + response + "</pre>"
+        //              }
+        //         },
+        //         error: function(xhr){
+        //             console.log("An error occured: " + xhr.status + " " + xhr.statusText);
+        //
+        //         }
+        //
+	    //   });
       },
     });
 }
