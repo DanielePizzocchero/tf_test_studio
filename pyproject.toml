@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "web_sdk_demo_orch"
+name = "tf-test-studio"
 version = "0.1.0"
-description = "python web sdk test orch"
+description = "python web sdk tf studio flow"
 authors = ["daniele.pizzocchero <daniele.pizzocchero@onfido.com>"]
 
 [tool.poetry.dependencies]

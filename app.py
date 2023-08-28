@@ -62,7 +62,7 @@ def initiate_workflow(applicant_id, workflow_id):
     #“applicant_id”: “ < APPLICANT_ID >”
     #}
 
-    url = "https://api.eu.onfido.com/v4/workflow_runs"
+    url = "https://api.eu.onfido.com/v3.6/workflow_runs"
     payload = json.dumps({
         "workflow_id": workflow_id,
         "applicant_id": applicant_id
