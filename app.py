@@ -30,8 +30,8 @@ def authenticate():
     #print(request.method)
 
     if request.method == 'POST':
-        session['token'] = request.form.get("token")
-        session['workflow_id'] = request.form.get("workflow_id")
+        session['token'] = request.form.get("token").strip()
+        session['workflow_id'] = request.form.get("workflow_id").strip()
     else:
         if session.get('token') is None or session.get("workflow_id") is None:
             return render_template("error.html", error="token/workflow id not set")
