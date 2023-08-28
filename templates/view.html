@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Onfido Web SDK example</title>
 
-    <meta name="viewport" content="width=device-width,minimal-ui"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no"><style type="text/css">html,
-      body {
+    <meta name="viewport" content="width=device-width,minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no"><style type="text/css">
+    html, body {
         width: 100%;
         height: 100%;
         margin: 0;
@@ -57,8 +59,8 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="static/onfido.min.js"></script>
-    <link rel="stylesheet" href="static/style.css" />
+    <script src="https://assets.onfido.com/web-sdk-releases/13.3.1/onfido.min.js"></script>
+    <link rel="stylesheet" href="https://assets.onfido.com/web-sdk-releases/13.3.1/style.css" />
 </head>
 <body>
 <script type="text/javascript">//<![CDATA[
@@ -107,28 +109,6 @@ function onfidoInit(){
       onComplete: function (data) {
         // callback for when everything is complete
         console.log(data.document_front.id)
-        // $.ajax({
-        //         type : "POST",
-        //         url : '/check',
-        //         dataType : 'json',
-        //         contentType: "application/json; charset=utf-8",
-        //         data : JSON.stringify({ doc_id : data.document_front.id}),
-        //
-        //         success: function (response) {
-        //             console.log("response " + JSON.stringify(response))
-        //             if (! response.no_autofill){
-        //                 document.write("<link rel='stylesheet' href='static/style.css' />")
-        //                 document.write("<div id='onfido-mount'><div class='onfido-sdk-ui-Modal-inner' style='text-align: left; max-width: 50em;'><div id='autofill' class='onfido-sdk-ui-Theme-step onfido-sdk-ui-Theme-defaultLogo' style='text-align: left;'></div></div></div>")
-        //                 response = JSON.stringify(response, null, "  ")
-        //                 document.getElementById("autofill").innerHTML = "<pre>" + response + "</pre>"
-        //              }
-        //         },
-        //         error: function(xhr){
-        //             console.log("An error occured: " + xhr.status + " " + xhr.statusText);
-        //
-        //         }
-        //
-	    //   });
       },
     });
 }

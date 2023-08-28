@@ -32,10 +32,6 @@ def authenticate():
     if request.method == 'POST':
         session['token'] = request.form.get("token")
         session['workflow_id'] = request.form.get("workflow_id")
-        session['autofill'] = request.form.get("autofill")
-        print ('autofill', session['autofill'])
-        session['kfaces'] = request.form.get("kfaces")
-        print('kfaces', session['kfaces'])
     else:
         if session.get('token') is None or session.get("workflow_id") is None:
             return render_template("error.html", error="token/workflow id not set")
@@ -52,15 +48,10 @@ def authenticate():
         return render_template("view.html", token=token, applicant_id=session["applicant_id"], workflow_run_id=workflow_run_id)
     else:
         return render_template("error.html", error=ret)
-    #initiate workflow
+
 
 
 def initiate_workflow(applicant_id, workflow_id):
-    # POST /v4/workflow_runs
-    #{
-    #“workflow_id”: “ < WORKFLOW_ID >”,
-    #“applicant_id”: “ < APPLICANT_ID >”
-    #}
 
     url = "https://api.eu.onfido.com/v3.6/workflow_runs"
     payload = json.dumps({
@@ -109,66 +100,7 @@ def create_applicant(api):
         return OnfidoUnknownError
 
 
-@app.route("/check", methods=['POST'])
-def run_check_request():
-
-    #reports = ["document", "facial_similarity_photo"]
-    reports = ["document"]
-
-    if session["kfaces"] is not None:
-        reports.append("known_faces")
-
-    print(reports)
-
-    request_body = {"applicant_id": session["applicant_id"], "report_names": reports }
-
-    try:
-        api = onfido.Api(session['token'], region=Region.EU)
-        api.check.create(request_body)
-        if session['autofill'] is None:
-
-
-            response = {
-                "no_autofill": "true",
-            }
-            return json.dumps(response)
-        else:
-            jsonData = request.get_json()
-            url = "https://api.eu.onfido.com/v3.2/extractions"
-            payload = json.dumps({
-                 "document_id": jsonData['doc_id']
-            })
-            headers = {
-                'Authorization': f"Token token={session['token']}",
-                'Content-Type': 'application/json'
-            }
-            response = requests.request("POST", url, headers=headers, data=payload)
-            print (response.text)
-            return response.text
-
-
-    except OnfidoServerError:
-        return render_template("error.html", error=str(OnfidoServerError))
-    except OnfidoRequestError:
-        return render_template("error.html", error=str(OnfidoRequestError))
-    except OnfidoInvalidSignatureError:
-        return render_template("error.html", error=str(OnfidoInvalidSignatureError))
-    except OnfidoTimeoutError:
-        return render_template("error.html", error=str(OnfidoTimeoutError))
-    except OnfidoConnectionError:
-        return render_template("error.html", error=str(OnfidoConnectionError))
-    except OnfidoUnknownError:
-        return render_template("error.html", error=str(OnfidoUnknownError))
 
 
 
-
-# @app.route("/face_auth")
-# def face_auth():
-#     api = onfido.Api(os.environ["API_token"], region=Region.EU)
-#
-#     #hardcode applicant id for now
-#     request_body = {"applicant_id": "97c044dd-e10d-47c1-9a6a-cfe872893dbb", "referrer": "*"} #this trusted face came from facial similarity
-#     token = api.sdk_token.generate(request_body)["token"]
-#     return render_template("auth.html", token=token)
 
